@@ -24,16 +24,25 @@ module.exports = function toReadable (number) {
   }
 
   if(number >= 20 && number < 100) {
-        return b[(number - number%10) /10] + " " + a[number%10]
+        res = b[(number - number%10) /10];
+        if(number%10 > 0) {
+            return res + " " + a[number%10]
+        }
+        return res
   }
 
   if(number >= 100 && number < 1000) {
         res = a[(number - number%100) /100] + " hundred ";
         if((number%100) < 20) {
             return res + a[number%100]
+        }
+
+        if((number%100)%10 <= 0) {
+            return res + b[(number%100 - (number%100)%10) / 10]
         } else {
             return res + b[(number%100 - (number%100)%10) / 10] + " " + a[number%10]
         }
-  }   
+             
    
+}
 }
